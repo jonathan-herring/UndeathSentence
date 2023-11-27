@@ -1,17 +1,18 @@
 # Arcade
 
-Game Title: Undeath Sentence
+## Game Title: Undeath Sentence
 
+### Description
+You play as a lone character fending off a relentless horde of zombies that progressively becomes faster, stronger, and larger in number as the game advances.
 
-Description: You play as a lone character fending theirself off from a horde of zombies that become faster, stronger, 
-more varied, and larger in the number as the game progresses.
+### Controls
+- Use WASD keys for movement.
+- Use the mouse to change your character's direction/aim.
+- Click LMB to use your weapon.
+- Click RMB to pick up a weapon from the ground.
 
+### Win/Loss Condition
+Survive for 60 seconds and clear the field of all zombies. Losing all your health or failing to clear the screen results in a loss. Clearing the screen advances you to the next zone with the same health but tougher zombies. Win by surviving all 10 rounds.
 
-Controls: Use WASD keys to control movement and the mouse to change the direction of your characater/aim. Click LMB to use your weapon.
-Click RMB to pick up a weapon from the ground.
-
-
-Win/Loss Condition: You have 60 seconds to survive and clear the field of all zombies. If you lose all your health or fail to clear your screen of all the zombies, the game will end in a loss. Successfully clearing the screen of all enemies results will allow you to enter the next zone with the same amount of health and harder zombies. You win the game by winning all 10 rounds.
-
-
-Storyline: You have been sentenced to death for stealing food from another member on board your spaceship. However, the spaceship plans on landing on 10 different planets for supplies this month, so they are giving you the opportunity to be exonerated if you are able to clear all 10 of these zones of their undead populations. In hopes of getting the most utility out of your efforts as possible, they plan to drop you off at the planets in order of their clearing difficulties. In order to avoid being spotted by enemy ships, the council has decided to give you no more than 60 seconds to clear each zone before they abandon you. Win your freedom by defeating all enemies within 60 seconds on 10 different planets, each planet being more difficult to clear than the last, or die trying.
+### Storyline
+Sentenced to death for stealing food aboard a spaceship, you're given a chance for exoneration. The spaceship plans to visit 10 planets for supplies this month. Clear all 10 planets of their undead populations to win freedom. Each planet's zone gets progressively harder. You have only 60 seconds per zone before being abandoned to avoid enemy ship detection.
