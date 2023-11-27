@@ -16,3 +16,18 @@ Survive for 60 seconds and clear the field of all zombies. Losing all your healt
 
 ### Storyline
 Sentenced to death for stealing food aboard a spaceship, you're given a chance for exoneration. The spaceship plans to visit 10 planets for supplies this month. Clear all 10 planets of their undead populations to win freedom. Each planet's zone gets progressively harder. You have only 60 seconds per zone before being abandoned to avoid enemy ship detection.
+
+### Instructions
+#### Compilation:
+1. Download the game files
+2. Ensure OpenGL 4.3 is installed
+3. Run make game
+
+#### Running the Game:
+1. Open the terminal
+2. Run the command ./UndeathSentence
+
+#### Interacting with the Game:
+- Use the provided controls (WASD keys, mouse clicks) to navigate and interact within the game environment.
+- Follow on-screen prompts for pickups, weapon usage, and advancing to the next zone.
+
