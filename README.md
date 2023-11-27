@@ -1,6 +1,4 @@
-# Arcade
-
-## Game Title: Undeath Sentence
+# Undeath Sentence
 
 ### Description
 You play as a lone character fending off a relentless horde of zombies that progressively becomes faster, stronger, and larger in number as the game advances.
