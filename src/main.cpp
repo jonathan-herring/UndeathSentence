@@ -2,7 +2,7 @@
 
 
 void display(); // Display callback
-// Make a reshape callback function if worried about user resizing the window
+void reshape(int, int); // Reshape callback
 
 void init()
 {
@@ -16,7 +16,8 @@ int main(int argc, char** argv)
     glutInitWindowPosition(200, 100);
     glutInitWindowSize(500, 500);
     glutCreateWindow("Undeath Sentence");
-    glutDisplayFunc(display); // Argument display is a callback function that updates the display
+    glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
     
     init();
 
@@ -29,5 +30,14 @@ void display() // Updates display
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glutSwapBuffers(); // Displays the frame buffer on the screen
+}
+
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, 40.0, 0.0, 40.0, -1.0, 1.0);
+    glMatrixMode(GL_MODELVIEW);
 }
 
