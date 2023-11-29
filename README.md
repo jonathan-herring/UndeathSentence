@@ -17,9 +17,7 @@ Sentenced to death for stealing food aboard a spaceship, you're given a chance f
 
 ### Instructions
 #### Compilation:
-1. Download the game files
-2. Ensure OpenGL 4.3 is installed
-3. Run make game
+1. Run make game
 
 #### Running the Game:
 1. Open the terminal
