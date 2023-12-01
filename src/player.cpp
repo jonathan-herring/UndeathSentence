@@ -2,12 +2,13 @@
 
 #include <GL/glut.h>
 
-Player::Player() 
+Player::Player()
 {
     this->x = 0.5f;
     this->y = 0.5f;
     this->width = 0.05f;
     this->height = 0.05f;
+    this->speed = 0.5; // Default speed
 }
 
 void Player::draw()
@@ -22,6 +23,6 @@ void Player::draw()
 
 void Player::move(float dx, float dy) 
 {
-    this->x += dx;
-    this->y += dy;
+        this->x += dx;
+        this->y += dy;
 }

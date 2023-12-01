@@ -6,8 +6,8 @@
 Zombie::Zombie(Player& player) 
     : player(player)
 {
-    this->x = (float)(rand() / RAND_MAX);
-    this->y = (float)(rand() / RAND_MAX);
+    this->x = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+    this->y = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
     this->width = 0.05f;
     this->height = 0.05f;
 }

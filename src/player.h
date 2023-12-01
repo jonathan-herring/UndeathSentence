@@ -7,6 +7,7 @@ class Player
 
     float x, y; // Player position
     float width, height; // Player size
+    float speed;
 
     Player();
 
