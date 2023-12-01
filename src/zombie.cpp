@@ -6,8 +6,8 @@
 Zombie::Zombie(Player& player) 
     : player(player)
 {
-    this->x = (float)(-99 + (rand() % 100));
-    this->y = (float)(-49 + (rand() % 50));
+    this->x = (float)(rand() / RAND_MAX);
+    this->y = (float)(rand() / RAND_MAX);
     this->width = 0.05f;
     this->height = 0.05f;
 }
@@ -24,14 +24,14 @@ void Zombie::draw()
 
 void Zombie::move(float px, float py) 
 {
-    if (px > this->x) {
+    if (px > this->x + player.width) {
         this->x += 0.0075f;
-    } else if(px > this->x) {
+    } else if (px  < this->x + player.width) {
         this->x -= 0.0075f;
     }
-    if (py > this->y) {
+    if (py > this->y + player.height) {
         this->y += 0.0075f;
-    } else if(py > this->y) {
+    } else if (py < this->y + player.height) {
         this->y -= 0.0075f;
     }
 }
