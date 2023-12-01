@@ -13,7 +13,7 @@ Zombie zombie3(player);
 void display();
 void reshape(int, int);
 void update(int);
-void handleKeypress(unsigned char, int, int);
+void handleKeypress(unsigned char, int);
 void handleKeyUp(unsigned char, int, int);
 
 void init()
