@@ -2,7 +2,7 @@ CXX = g++
 CFLAGS = -Wall -O3
 LDFLAGS = -lglut -lGL -lGLU
 
-SRC = 
+SRC = src/main.cpp src/player.cpp src/zombie.cpp
 
 all: UndeathSentence
 
