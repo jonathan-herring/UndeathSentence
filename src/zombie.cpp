@@ -4,15 +4,17 @@
 #include <GL/glut.h>
 #include <ctime>
 
-Zombie::Zombie(Player& player) 
+Zombie::Zombie(Player& player, float x_spawn, float, y_spawn) 
     : player(player)
 {
     srand(static_cast<unsigned>(time(nullptr)));  // Seed the random number generator
 
-    this->x = static_cast<float>(rand() % (int)(1.0 * 800) / 800);
-    this->y = static_cast<float>(rand() % (int)(1.0 * 600) / 600);
+    // this->x = static_cast<float>(rand() % (int)(1.0 * 800) / 800);
+    // this->y = static_cast<float>(rand() % (int)(1.0 * 600) / 600);
     // this->x = (float)(rand() / RAND_MAX);
     // this->y = (float)(rand() / RAND_MAX);
+    this->x = x_spawn;
+    this->y = y_spawn;
     this->width = 0.05f;
     this->height = 0.05f;
 }
