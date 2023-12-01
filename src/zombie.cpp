@@ -1,8 +1,8 @@
-#include "player.h"
+#include "zombie.h"
 
 #include <GL/glut.h>
 
-Player::Player() 
+Zombie::Zombie() 
 {
     this->x = 0.5f;
     this->y = 0.5f;
@@ -20,7 +20,7 @@ void n::draw()
     glEnd();
 }
 
-void Player::move(float dx, float dy) 
+void Zombie::move(float dx, float dy) 
 {
     this->x += dx;
     this->y += dy;
