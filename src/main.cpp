@@ -52,16 +52,9 @@ void display() // Updates display
     player.draw();
 
     //zombie movement towards player
-    if(player.x > zombie.x){
-        zombie.move(0.0075f, 0);
-    }else if(player.x =< zombie.x){
-        zombie.move(-0.0075f, 0);
-    }
-    if(player.y > zombie.y){
-        zombie.move(0, 0.0075f);
-    }else if(player.y =< zombie.y){
-        zombie.move(0, -0.0075f);
-    }
+    zombie1.move(player->x, player->y);
+    zombie2.move(player->x, player->y);
+    zombie3.move(player->x, player->y);
     
     zombie1.draw();
     zombie2.draw();
