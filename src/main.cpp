@@ -4,14 +4,21 @@
 #include <GL/glut.h>
 
 Player player;
-Zombie zombie1(player);
-Zombie zombie2(player);
-Zombie zombie3(player);
 
 void display(); // Display callback
 void reshape(int, int); // Reshape callback
 void update(int);
 void handleKeypress(unsigned char, int, int); // Keypress callback
+void randomCoords(); // for random zombie spawns
+
+float rand_y;
+float rand_x;
+randomCoords();
+Zombie zombie1(player, rand_x, rand_y);
+randomCoords();
+Zombie zombie2(player, rand_x, rand_y);
+randomCoords();
+Zombie zombie3(player, rand_x, rand_y);
 
 void init()
 {
@@ -99,3 +106,7 @@ void handleKeypress(unsigned char key, int x, int y)
     }
 }
 
+randomCoords(){
+    rand_x = static_cast<float>(rand() % (int)(1.0 * 800) / 800);
+    rand_y = static_cast<float>(rand() % (int)(1.0 * 600) / 600);
+}
