@@ -3,15 +3,16 @@
 #include <cstdlib>
 #include <GL/glut.h>
 
-Zombie::Zombie() 
+Zombie::Zombie(Player& player) 
+    : player(player)
 {
-    this->x = (-99 + (rand() % 100)).float;
-    this->y = (-49 + (rand() % 50)).float;
+    this->x = (float)(-99 + (rand() % 100));
+    this->y = (float)(-49 + (rand() % 50));
     this->width = 0.05f;
     this->height = 0.05f;
 }
 
-void n::draw()
+void Zombie::draw()
 {
     glBegin(GL_QUADS);
         glVertex2f(x - width / 2, y - height / 2);
@@ -23,14 +24,14 @@ void n::draw()
 
 void Zombie::move(float px, float py) 
 {
-    if(px > this->x){
+    if (px > this->x) {
         this->x += 0.0075f;
-    }else if(px > this->x){
+    } else if(px > this->x) {
         this->x -= 0.0075f;
     }
-    if(py > this->y){
+    if (py > this->y) {
         this->y += 0.0075f;
-    }else if(py > this->y){
+    } else if(py > this->y) {
         this->y -= 0.0075f;
     }
 }

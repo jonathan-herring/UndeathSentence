@@ -4,9 +4,9 @@
 #include <GL/glut.h>
 
 Player player;
-Zombie zombie1;
-Zombie zombie2;
-Zombie zombie3;
+Zombie zombie1(player);
+Zombie zombie2(player);
+Zombie zombie3(player);
 
 void display(); // Display callback
 void reshape(int, int); // Reshape callback
@@ -52,9 +52,9 @@ void display() // Updates display
     player.draw();
 
     //zombie movement towards player
-    zombie1.move(player->x, player->y);
-    zombie2.move(player->x, player->y);
-    zombie3.move(player->x, player->y);
+    zombie1.move(player.x, player.y);
+    zombie2.move(player.x, player.y);
+    zombie3.move(player.x, player.y);
     
     zombie1.draw();
     zombie2.draw();
