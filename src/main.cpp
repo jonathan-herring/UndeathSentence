@@ -3,6 +3,7 @@
 #include <GL/glut.h>
 
 Player player;
+Zombie zombie;
 
 void display(); // Display callback
 void reshape(int, int); // Reshape callback
@@ -46,6 +47,8 @@ void display() // Updates display
 {
     glClear(GL_COLOR_BUFFER_BIT);
     player.draw();
+    zombie.move();
+    zombie.draw();
     glutSwapBuffers(); // Displays the frame buffer on the screen
 }
 
