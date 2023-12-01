@@ -1,4 +1,5 @@
 #include "player.h"
+#include "zombie.h"
 
 #include <GL/glut.h>
 
@@ -47,7 +48,19 @@ void display() // Updates display
 {
     glClear(GL_COLOR_BUFFER_BIT);
     player.draw();
-    zombie.move();
+
+    //zombie movement towards player
+    if(player.x > zombie.x){
+        zombie.move(0.0075f, 0);
+    }else if(player.x =< zombie.x){
+        zombie.move(-0.0075f, 0);
+    }
+    if(player.y > zombie.y){
+        zombie.move(0, 0.0075f);
+    }else if(player.y =< zombie.y){
+        zombie.move(0, -0.0075f);
+    }
+    
     zombie.draw();
     glutSwapBuffers(); // Displays the frame buffer on the screen
 }
