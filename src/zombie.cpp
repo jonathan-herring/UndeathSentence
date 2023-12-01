@@ -1,11 +1,11 @@
 #include "zombie.h"
-
+#include <cstdlib>
 #include <GL/glut.h>
 
 Zombie::Zombie() 
 {
-    this->x = 0.5f;
-    this->y = 0.5f;
+    this->x = (-99 + (rand() % 100)).float;
+    this->y = (-49 + (rand() % 50)).float;
     this->width = 0.05f;
     this->height = 0.05f;
 }
