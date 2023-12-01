@@ -94,4 +94,3 @@ void handleKeyUp(unsigned char key, int x, int y)
 {
     movement.keyUp(key, x, y);
 }
-
