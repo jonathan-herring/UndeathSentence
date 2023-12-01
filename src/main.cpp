@@ -4,7 +4,9 @@
 #include <GL/glut.h>
 
 Player player;
-Zombie zombie;
+Zombie zombie1;
+Zombie zombie2;
+Zombie zombie3;
 
 void display(); // Display callback
 void reshape(int, int); // Reshape callback
@@ -61,7 +63,9 @@ void display() // Updates display
         zombie.move(0, -0.0075f);
     }
     
-    zombie.draw();
+    zombie1.draw();
+    zombie2.draw();
+    zombie3.draw();
     glutSwapBuffers(); // Displays the frame buffer on the screen
 }
 
