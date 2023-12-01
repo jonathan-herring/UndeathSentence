@@ -10,7 +10,7 @@ Player::Player()
     this->height = 0.05f;
 }
 
-void Player::draw()
+void n::draw()
 {
     glBegin(GL_QUADS);
         glVertex2f(x - width / 2, y - height / 2);
