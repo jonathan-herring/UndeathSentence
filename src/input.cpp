@@ -24,16 +24,35 @@ void MovementHandler::keyUp(unsigned char key, int x, int y) {
 
 void MovementHandler::update(float deltaTime) {
     float dx = 0, dy = 0;
-    
-    if (upPressed) dy -= speed * deltaTime;
-    if (downPressed) dy += speed * deltaTime;
-    if (leftPressed) dx -= speed * deltaTime;
-    if (rightPressed) dx += speed * deltaTime;
+    float speed = player.speed;
+
+    float positionChange = speed * deltaTime;
+
+    if ((upPressed))
+        dy += speed;
+    if ((downPressed))
+        dy -= speed;
+    if ((leftPressed))
+        dx -= speed;
+    if ((rightPressed))
+        dx += speed;
 
     if ((upPressed || downPressed) && (leftPressed || rightPressed)) {
-        float diagonalSpeed = speed / sqrt(2.0f); // Normalize speed for diagonal movement
-        dx *= diagonalSpeed;
-        dy *= diagonalSpeed;
+        float diagNormConstant = 1 / sqrt(2.0f);
+        dx *= diagNormConstant;
+        dy *= diagNormConstant;
+    }
+    dx *= deltaTime;
+    dy *= deltaTime;
+
+    if (dy < 0 && (player.y - positionChange - player.height / 2 < 0))
+        dy = 0;
+    else if (dy > 0 && (player.y + positionChange + player.height / 2 > 1))
+        dy = 0;
+    if (dx < 0 && (player.x - positionChange - player.width / 2 < 0))
+        dx = 0;
+    else if (dx > 0 && (player.x + positionChange + player.width / 2 > 1)) {
+        dx = 0;
     }
 
     player.move(dx, dy);

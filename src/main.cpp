@@ -1,9 +1,11 @@
 #include "player.h"
 #include "zombie.h"
+#include "input.h"
 
 #include <GL/glut.h>
 
 Player player;
+MovementHandler movement(player);
 Zombie zombie1(player);
 Zombie zombie2(player);
 Zombie zombie3(player);
@@ -12,6 +14,7 @@ void display(); // Display callback
 void reshape(int, int); // Reshape callback
 void update(int);
 void handleKeypress(unsigned char, int, int); // Keypress callback
+void handleKeyUp(unsigned char, int, int);
 
 void init()
 {
@@ -33,7 +36,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(handleKeypress);
-    glutTimerFunc(60, update, 0);
+    glutKeyboardUpFunc(handleKeyUp);
+    glutTimerFunc(16, update, 0);
     
 
 
@@ -49,6 +53,7 @@ int main(int argc, char** argv)
 void display() // Updates display
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    movement.update(0.01667);
     player.draw();
 
     //zombie movement towards player
@@ -82,24 +87,11 @@ void update(int value)
 
 void handleKeypress(unsigned char key, int x, int y)
 {
-    switch (key)
-    {
-        case 'w':
-            if (player.y + 0.01f + player.height / 2 <= 1)
-            player.move(0, 0.01f);
-            break;
-        case 's':
-            if (player.y - 0.01f - player.height / 2 >= 0)
-            player.move(0, -0.01f);
-            break;
-        case 'a':
-            if (player.x - 0.01f - player.width / 2 >= 0)
-                player.move(-0.01f, 0);
-            break;
-        case 'd':
-            if (player.x + 0.01f + player.height / 2 <= 1)
-                player.move(0.01f, 0);
-            break;
-    }
+    movement.keyPressed(key, x, y);
+}
+
+void handleKeyUp(unsigned char key, int x, int y)
+{
+    movement.keyUp(key, x, y);
 }
 

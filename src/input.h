@@ -10,5 +10,4 @@ public:
 private:
     Player& player;
     bool upPressed, downPressed, leftPressed, rightPressed;
-    float speed;
 };
