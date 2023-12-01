@@ -17,8 +17,7 @@ Sentenced to death for stealing food aboard a spaceship, you're given a chance f
 
 ### Instructions
 #### Compilation:
-1. Open terminal
-2. Run make game
+1. Run make
 
 #### Running the Game:
 1. Open the terminal
