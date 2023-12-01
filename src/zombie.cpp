@@ -1,4 +1,5 @@
 #include "zombie.h"
+#include "player.h"
 #include <cstdlib>
 #include <GL/glut.h>
 
@@ -20,8 +21,16 @@ void n::draw()
     glEnd();
 }
 
-void Zombie::move(float dx, float dy) 
+void Zombie::move(float px, float py) 
 {
-    this->x += dx;
-    this->y += dy;
+    if(px > this->x){
+        this->x += 0.0075f;
+    }else if(px > this->x){
+        this->x -= 0.0075f;
+    }
+    if(py > this->y){
+        this->y += 0.0075f;
+    }else if(py > this->y){
+        this->y -= 0.0075f;
+    }
 }
