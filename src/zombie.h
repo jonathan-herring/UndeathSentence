@@ -5,7 +5,7 @@ class Zombie
 {
     public:
 
-    float x_zombie, y_zombie; // Zombie position
+    float x, y; // Zombie position
     float width, height; // Zombie size
 
     Zombie();
