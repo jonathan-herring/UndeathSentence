@@ -2,7 +2,7 @@
 
 #include <GL/glut.h>
 
-Player::Player() 
+Player::Player()
 {
     this->x = 0.5f;
     this->y = 0.5f;
@@ -22,6 +22,6 @@ void Player::draw()
 
 void Player::move(float dx, float dy) 
 {
-    this->x += dx;
-    this->y += dy;
+        this->x += dx;
+        this->y += dy;
 }

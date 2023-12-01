@@ -11,7 +11,7 @@ void handleKeypress(unsigned char, int, int); // Keypress callback
 
 void init()
 {
-    glClearColor(0.0, 0.0, 0.0, 1.0); // If we ever want to chang the background color
+    glClearColor(0.0, 0.0, 0.0, 1.0); // If we ever want to change the background color
 }
 
 
@@ -22,13 +22,14 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    // glutInitWindowPosition(200, 100);
-    glutInitWindowSize(800, 600);
+    glutInitWindowPosition(660, 240);
+    glutInitWindowSize(600, 600);
     glutCreateWindow("Undeath Sentence");
 
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-    glutKeyboardFunc(handleKeypress);
+    glutKeyboardFunc(keyPressed); //
+    glutKeyboardUpFunc(keyUp); // 
     glutTimerFunc(60, update, 0);
     
 
@@ -72,16 +73,20 @@ void handleKeypress(unsigned char key, int x, int y)
     switch (key)
     {
         case 'w':
-            player.move(0, 0.01f);
+            if (player.y + 0.01f + player.height / 2 <= 1)
+                player.move(0, 0.01f);
             break;
         case 's':
-            player.move(0, -0.01f);
+            if (player.y - 0.01f - player.height / 2 >= 0)
+                player.move(0, -0.01f);
             break;
         case 'a':
-            player.move(-0.01f, 0);
+            if (player.x - 0.01f - player.width / 2 >= 0)
+                player.move(-0.01f, 0);
             break;
         case 'd':
-            player.move(0.01f, 0);
+            if (player.x + 0.01f + player.height / 2 <= 1)
+                player.move(0.01f, 0);
             break;
     }
 }
