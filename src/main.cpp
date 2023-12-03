@@ -10,15 +10,15 @@ Zombie zombie1(player);
 Zombie zombie2(player);
 Zombie zombie3(player);
 
-void display(); // Display callback
-void reshape(int, int); // Reshape callback
+void display();
+void reshape(int, int);
 void update(int);
-void handleKeypress(unsigned char, int, int); // Keypress callback
+void handleKeypress(unsigned char, int);
 void handleKeyUp(unsigned char, int, int);
 
 void init()
 {
-    glClearColor(0.0, 0.0, 0.0, 1.0); // If we ever want to chang the background color
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Background color
 }
 
 
@@ -41,7 +41,7 @@ int main(int argc, char** argv)
     
 
 
-    glutMainLoop(); // Takes care of all interactions with program and calls callback functions
+    glutMainLoop();
 
     return 0;
 }
@@ -50,13 +50,13 @@ int main(int argc, char** argv)
 
 
 
-void display() // Updates display
+void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     movement.update(0.01667);
     player.draw();
 
-    //zombie movement towards player
+    // Zombie movement toward player
     zombie1.move(player.x, player.y);
     zombie2.move(player.x, player.y);
     zombie3.move(player.x, player.y);
@@ -64,7 +64,7 @@ void display() // Updates display
     zombie1.draw();
     zombie2.draw();
     zombie3.draw();
-    glutSwapBuffers(); // Displays the frame buffer on the screen
+    glutSwapBuffers();
 }
 
 
