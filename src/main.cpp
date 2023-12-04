@@ -13,7 +13,7 @@ Zombie zombie3(player);
 void display();
 void reshape(int, int);
 void update(int);
-void handleKeypress(unsigned char, int);
+void handleKeypress(unsigned char, int, int);
 void handleKeyUp(unsigned char, int, int);
 
 void init()
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowSize(800, 600);
+    glutInitWindowSize(800, 800);
     glutCreateWindow("Undeath Sentence");
 
     glutDisplayFunc(display);
@@ -47,12 +47,13 @@ int main(int argc, char** argv)
 
 
 
-
+void drawBackground();
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     movement.update(0.01667);
+    drawBackground();
     player.draw();
 
     // Zombie movement toward player
@@ -66,6 +67,17 @@ void display()
     glutSwapBuffers();
 }
 
+void drawBackground()
+{
+    glBegin(GL_QUADS);
+        glColor3ub(19,23,25);
+        glVertex2f(0, 0);
+        glVertex2f(1, 0);
+        glVertex2f(1, 0.8);
+        glVertex2f(0, 0.8);
+        glColor3ub(255,255,255);
+    glEnd();
+}
 
 void reshape(int width, int height)
 {
