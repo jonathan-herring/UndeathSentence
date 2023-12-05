@@ -1,8 +1,8 @@
 CXX = g++
 CFLAGS = -Wall -O3
-LDFLAGS = -lglut -lGL -lGLU
+LDFLAGS = -lglut -lGL -lGLU -lm -lstdc++
 
-SRC = src/main.cpp src/player.cpp src/input.cpp src/zombie.cpp
+SRC = src/main.cpp src/player.cpp src/input.cpp src/zombie.cpp src/bullet.cpp
 
 all: UndeathSentence
 
