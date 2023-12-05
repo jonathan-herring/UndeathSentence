@@ -1,11 +1,13 @@
 #include "player.h"
 #include "zombie.h"
 #include "input.h"
+#include "bullet.h"
 
 #include <GL/glut.h>
 
 Player player;
-MovementHandler movement(player);
+std::vector<Bullet> bullets;
+InputHandler controls(player, bullets);
 Zombie zombie1(player);
 Zombie zombie2(player);
 Zombie zombie3(player);
@@ -15,6 +17,7 @@ void reshape(int, int);
 void update(int);
 void handleKeypress(unsigned char, int, int);
 void handleKeyUp(unsigned char, int, int);
+void handleMousePress(int, int, int, int);
 
 void init()
 {
@@ -36,6 +39,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);
     glutKeyboardFunc(handleKeypress);
     glutKeyboardUpFunc(handleKeyUp);
+    glutMouseFunc(handleMousePress);
     glutTimerFunc(16, update, 0);
     
 
@@ -52,18 +56,31 @@ void drawBackground();
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    movement.update(0.01667);
-    drawBackground();
-    player.draw();
 
-    // Zombie movement toward player
+    // Game logic updates
+    controls.update(0.01667);
+
     zombie1.move(player.x, player.y);
     zombie2.move(player.x, player.y);
     zombie3.move(player.x, player.y);
+
+    for (auto bullet : bullets) {
+        bullet.move(0.01667);
+    }
+
+    // Render game to screen
+    drawBackground();
+
+    player.draw();
     
     zombie1.draw();
     zombie2.draw();
     zombie3.draw();
+
+    for (auto bullet : bullets) {
+        bullet.draw();
+    }
+
     glutSwapBuffers();
 }
 
@@ -98,10 +115,15 @@ void update(int value)
 
 void handleKeypress(unsigned char key, int x, int y)
 {
-    movement.keyPressed(key, x, y);
+    controls.keyPressed(key, x, y);
 }
 
 void handleKeyUp(unsigned char key, int x, int y)
 {
-    movement.keyUp(key, x, y);
+    controls.keyUp(key, x, y);
+}
+
+void handleMousePress(int button, int state, int x, int y)
+{
+    controls.mousePressed(button, state, x, y);
 }
