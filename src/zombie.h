@@ -11,6 +11,7 @@ class Zombie
 
     public:
 
+    float health;
     float x, y; // Zombie position
     float width, height; // Zombie size
 

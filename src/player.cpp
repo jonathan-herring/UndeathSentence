@@ -23,6 +23,6 @@ void Player::draw()
 
 void Player::move(float dx, float dy) 
 {
-        this->x += dx;
-        this->y += dy;
+    this->x += dx;
+    this->y += dy;
 }
