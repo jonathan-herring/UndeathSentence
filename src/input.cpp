@@ -3,7 +3,11 @@
 #include <GL/glut.h>
 #include <math.h>
 
-InputHandler::InputHandler(Player& player, std::vector<Bullet>& bullets) : player(player), bullets(bullets) {}
+InputHandler::InputHandler(Player& player, std::vector<Bullet>& bullets) : player(player), bullets(bullets) 
+{
+    timeSinceLastFire = 1.0f;
+    bulletCoolDown = 0.3f;
+}
 
 void InputHandler::keyPressed(unsigned char key, int x, int y) {
     switch (key) {
@@ -60,6 +64,8 @@ void InputHandler::update(float deltaTime) { // Only handles movement of players
 
     player.move(dx, dy);
 
+    timeSinceLastFire += deltaTime;
+
     for (size_t i = 0; i < this->bullets.size(); i++)
     {
         this->bullets.at(i).move(deltaTime);
@@ -67,9 +73,12 @@ void InputHandler::update(float deltaTime) { // Only handles movement of players
 }
 
 void InputHandler::mousePressed(int button, int state, int x, int y) {
-    if (button == GLUT_LEFT_BUTTON) {
-        float gameX = (x * (1.0f / 800.0f));
-        float gameY = (1 - (y * (1.0f / 800.0f)));
-        bullets.push_back(Bullet(player.x, player.y, gameX, gameY));
+    if (timeSinceLastFire >= bulletCoolDown) {
+        if (button == GLUT_LEFT_BUTTON) {
+            float gameX = (x * (1.0f / 800.0f));
+            float gameY = (1 - (y * (1.0f / 800.0f)));
+            bullets.push_back(Bullet(player.x, player.y, gameX, gameY));
+        }
+        timeSinceLastFire = 0.0f;
     }
 }

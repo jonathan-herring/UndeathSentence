@@ -17,6 +17,8 @@ public:
 private:
     Player& player;
     std::vector<Bullet>& bullets;
+    float timeSinceLastFire; // Seconds
+    float bulletCoolDown; // Seconds
     bool upPressed, downPressed, leftPressed, rightPressed;
 };
 
