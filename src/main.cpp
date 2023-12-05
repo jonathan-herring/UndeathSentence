@@ -8,9 +8,9 @@
 Player player;
 std::vector<Bullet> bullets;
 InputHandler controls(player, bullets);
-Zombie zombie1(player);
-Zombie zombie2(player);
-Zombie zombie3(player);
+Zombie zombie1(player, 100, 5, 1);
+Zombie zombie2(player, 100, 5, 1);
+Zombie zombie3(player, 100, 5, 1);
 
 void display();
 void reshape(int, int);

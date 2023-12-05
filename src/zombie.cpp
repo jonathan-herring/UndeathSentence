@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <GL/glut.h>
 
-Zombie::Zombie(Player& player) 
-    : player(player)
+Zombie::Zombie(Player& player, float health, float damage, float speed) 
+    : player(player), health(health), damage(damage), speed(speed)
 {
     this->x = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
     this->y = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
@@ -26,13 +26,13 @@ void Zombie::draw()
 void Zombie::move(float px, float py) 
 {
     if (px > this->x + player.width) {
-        this->x += 0.0045f;
+        this->x += 0.0045f * speed;
     } else if (px  < this->x + player.width) {
-        this->x -= 0.0045f;
+        this->x -= 0.0045f * speed;
     }
     if (py > this->y + player.height) {
-        this->y += 0.0045f;
+        this->y += 0.0045f * speed;
     } else if (py < this->y + player.height) {
-        this->y -= 0.0045f;
+        this->y -= 0.0045f * speed;
     }
 }

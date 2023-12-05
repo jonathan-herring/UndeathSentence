@@ -7,18 +7,21 @@ class Zombie
 {
     private:
 
-    Player& player;
+        Player& player;
 
     public:
 
-    float health;
-    float x, y; // Zombie position
-    float width, height; // Zombie size
+        float health; // Default 100 | + 10 every round
+        float damage; // Default 5.0 | + 5.0 every round
+        float speed;  // Default 1.0 | + 0.1 every round
+        
+        float x, y; // Zombie position
+        float width, height; // Zombie size
 
-    Zombie(Player &player);
+        Zombie(Player &player, float health, float damage, float speed);
 
-    void draw();
-    void move(float dx, float dy);
+        void draw();
+        void move(float dx, float dy);
 };
 
 #endif
