@@ -13,12 +13,15 @@ public:
 
     void move(float deltaTime);
     void draw();
-    void checkCollision(std::vector<Zombie> zombies);
+    
+    bool isCollidingWithZombie(Zombie&);
+    bool isOffScreen() const;
 
 private:
     float x, y; // Position
     float dirX, dirY; // Direction
     float speed; // Speed
+    float damage; // Default damage is 25
     float width, height;
 };
 

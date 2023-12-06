@@ -3,8 +3,10 @@
 #include <GL/glut.h>
 #include <math.h>
 
-InputHandler::InputHandler(Player& player, std::vector<Bullet>& bullets) : player(player), bullets(bullets) 
+InputHandler::InputHandler(Player* player, std::vector<Bullet>* bullets)
 {
+    this->player = player;
+    this->bullets = bullets;
     timeSinceLastFire = 1.0f;
     bulletCoolDown = 0.3f;
 }
@@ -31,8 +33,7 @@ void InputHandler::keyUp(unsigned char key, int x, int y) {
 
 void InputHandler::update(float deltaTime) { // Only handles movement of players and bullets based on input
     float dx = 0, dy = 0;
-    float speed = player.speed;
-
+    float speed = player->speed;
     float positionChange = speed * deltaTime;
 
     if ((upPressed))
@@ -52,23 +53,23 @@ void InputHandler::update(float deltaTime) { // Only handles movement of players
     dx *= deltaTime;
     dy *= deltaTime;
 
-    if (dy < 0 && (player.y - positionChange - player.height / 2 < 0))
+    if (dy < 0 && (player->y - positionChange - player->height / 2 < 0))
         dy = 0;
-    else if (dy > 0 && (player.y + positionChange + player.height / 2 > 0.8))
+    else if (dy > 0 && (player->y + positionChange + player->height / 2 > 0.8))
         dy = 0;
-    if (dx < 0 && (player.x - positionChange - player.width / 2 < 0))
+    if (dx < 0 && (player->x - positionChange - player->width / 2 < 0))
         dx = 0;
-    else if (dx > 0 && (player.x + positionChange + player.width / 2 > 1)) {
+    else if (dx > 0 && (player->x + positionChange + player->width / 2 > 1)) {
         dx = 0;
     }
 
-    player.move(dx, dy);
+    player->move(dx, dy);
 
     timeSinceLastFire += deltaTime;
 
-    for (size_t i = 0; i < this->bullets.size(); i++)
+    for (size_t i = 0; i < bullets->size(); i++)
     {
-        this->bullets.at(i).move(deltaTime);
+        bullets->at(i).move(deltaTime);
     }
 }
 
@@ -77,7 +78,7 @@ void InputHandler::mousePressed(int button, int state, int x, int y) {
         if (button == GLUT_LEFT_BUTTON) {
             float gameX = (x * (1.0f / 800.0f));
             float gameY = (1 - (y * (1.0f / 800.0f)));
-            bullets.push_back(Bullet(player.x, player.y, gameX, gameY));
+            bullets->push_back(Bullet(player->x, player->y, gameX, gameY));
         }
         timeSinceLastFire = 0.0f;
     }

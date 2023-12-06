@@ -7,6 +7,7 @@ Bullet::Bullet(float startX, float startY, float targetX, float targetY)
     this->x = startX;
     this->y = startY;
     this->speed = 1.5f;
+    this->damage = 25;
 
     // Calculate direction vector
     float dx = targetX - startX;
@@ -24,8 +25,6 @@ void Bullet::move(float deltaTime)
     // Update position based on speed and direction
     x += dirX * speed * deltaTime;
     y += dirY * speed * deltaTime;
-
-    // Add collision detection logic here
 }
 
 void Bullet::draw()
@@ -36,4 +35,16 @@ void Bullet::draw()
         glVertex2f(x + width / 2, y + height / 2);
         glVertex2f(x - width / 2, y + height / 2);
     glEnd();
+}
+
+bool Bullet::isOffScreen() const
+{
+    if (x < 0 || x > 1 || y < 0 || y > 0.8)
+        return true;
+    return false;
+}
+
+bool bulletCollidingWithZombie(Zombie&) 
+{
+    
 }
