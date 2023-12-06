@@ -13,16 +13,21 @@ public:
 
     void move(float deltaTime);
     void draw();
+
+    void setCollisionStatusTrue();
     
-    bool isCollidingWithZombie(Zombie&);
+    bool isCollidingWithZombie(Zombie& zombie);
     bool isOffScreen() const;
+    bool isCollided() const;
+
+    float damage; // Default damage is 25
 
 private:
     float x, y; // Position
     float dirX, dirY; // Direction
     float speed; // Speed
-    float damage; // Default damage is 25
     float width, height;
+    bool collided;
 };
 
 #endif

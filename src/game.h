@@ -5,6 +5,7 @@
 #include "zombie.h"
 #include "input.h"
 #include "bullet.h"
+#include "ui.h"
 
 #include <GL/glut.h>
 
@@ -24,18 +25,27 @@ private:
     Player player;
     std::vector<Zombie> zombies;
     std::vector<Bullet> bullets;
+    UI ui;
     InputHandler controls;
 
     void spawnZombies(int count); // Spawn x zombies with health, damage, and speed set according to round number
     void removeDeadZombies(); // For removing zombies that are 0 health
     void updateBullets(float deltaTime); // For updating bullet positions
     void removeOffScreenBullets(); // For removing bullets that are off-screen
-    void resolveBulletCollision(); // Checks if each bullet is colliding with each zombie; if so, erase bullet, damage zombie
+    void resolveBulletCollisions(); // Checks if each bullet is colliding with each zombie; if so, erase bullet, damage zombie
+
+    // Zombie collisions with each other
+    void resolveZombieCollisions(); // Calls checkCollision and adjustPositions
+    bool checkCollision(const Zombie& a, const Zombie& b);
+    void adjustPositions(Zombie& a, Zombie& b);
 
     int currentRound;
     float timeSinceLastRoundChange;
     float roundDuration; // 15 seconds
 
+    // Stats
+    int zombiesKilled;
+    int secondsSurvived;
     int score;
 };
 
