@@ -5,15 +5,14 @@ You play as a lone character fending off a relentless horde of zombies that prog
 
 ### Controls
 - Use WASD keys for movement.
-- Use the mouse to change your character's direction/aim.
+- Move the mouse to aim.
 - Click LMB to use your weapon.
-- Click RMB to pick up a weapon from the ground.
 
-### Win/Loss Condition
-Survive for 60 seconds and clear the field of all zombies. Losing all your health or failing to clear the screen results in a loss. Clearing the screen advances you to the next zone with the same health but tougher zombies. Win by surviving all 10 rounds.
+### Loss Condition
+Rules are simple. Kill as many zombies as possible, while surviving as long as you can. Losing all your health will end the game, giving you another chance to restart from round 1 for a higher score.
 
 ### Storyline
-Sentenced to death for stealing food aboard a spaceship, you're given a chance for exoneration. The spaceship plans to visit 10 planets for supplies this month. Clear all 10 planets of their undead populations to win freedom. Each planet's zone gets progressively harder. You have only 60 seconds per zone before being abandoned to avoid enemy ship detection.
+Sentenced to death for stealing food aboard a spaceship, you're sentenced to death by the horde. There is no eacape, but you won't go down without a fight.
 
 ### Instructions
 #### Compilation:
@@ -25,6 +24,6 @@ Sentenced to death for stealing food aboard a spaceship, you're given a chance f
 2. Run the command ./UndeathSentence
 
 #### Interacting with the Game:
-- Use the provided controls (WASD keys, mouse clicks) to navigate and interact within the game environment.
-- Follow on-screen prompts for pickups, weapon usage, and advancing to the next zone.
+- Use WASD keys to move and the left mouse button to fire your weapon.
+- On the game over screen, press space to restart
 
