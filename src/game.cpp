@@ -14,6 +14,7 @@ void Game::init() // Spawn player, zombies, set stats, **initialize UI elements*
     score = 0;
     currentRound = 1;
     timeSinceLastRoundChange = 0;
+    deltaTime = 0.01667f;
 
     spawnZombies(3);
 }
@@ -58,12 +59,13 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
 
     for (auto& zombie : zombies)
     {
-        zombie.move(player.x, player.y);
+        zombie.move(player.x + player.width / 2, player.y + player.height / 2);
     }
 
     resolveZombieCollisions();
     resolveBulletCollisions();
     removeOffScreenBullets();
+    registerZombieHits();
     removeDeadZombies();
 
     ui.setHealth(player.health);
@@ -71,6 +73,12 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
     if (player.health <= 0) // Game over condition (guaranteed to happen eventually)
         ui.setGameOver(true);
     ui.update(deltaTime);
+}
+
+void Game::restartGame()
+{
+    // init() maybe -> see if this is viable
+    ui.setGameOver(false);
 }
 
 
@@ -84,6 +92,18 @@ void Game::spawnZombies(int count) // Spawn x zombies with health, damage, and s
     for (int i = 0; i < count; i ++)
     {
         zombies.push_back(Zombie(&player, newZombieHealth, newZombieDamage, newZombieSpeed));
+    }
+}
+
+void Game::registerZombieHits() {
+    for (Zombie& zombie : zombies) {
+        if (zombie.isInRange()) {
+            if (zombie.timeSinceLastHit >= zombie.hitCooldown) {
+                zombie.damagePlayer();
+                zombie.timeSinceLastHit = 0; // Resetting the cooldown
+            }
+        }
+        zombie.timeSinceLastHit += deltaTime;
     }
 }
 
@@ -155,18 +175,20 @@ void Game::resolveZombieCollisions()
     }
 }
 
+
 bool Game::checkCollision(const Zombie& a, const Zombie& b)
 {
+    float scalar = 2.2; // Default is 2; bigger allows more overlap
     // Calculate the sides of the rectangles
-    float aLeft = a.x - a.width / 2;
-    float aRight = a.x + a.width / 2;
-    float aTop = a.y + a.height / 2;
-    float aBottom = a.y - a.height / 2;
+    float aLeft = a.x - a.width / scalar;
+    float aRight = a.x + a.width / scalar;
+    float aTop = a.y + a.height / scalar;
+    float aBottom = a.y - a.height / scalar;
 
-    float bLeft = b.x - b.width / 2;
-    float bRight = b.x + b.width / 2;
-    float bTop = b.y + b.height / 2;
-    float bBottom = b.y - b.height / 2;
+    float bLeft = b.x - b.width / scalar;
+    float bRight = b.x + b.width / scalar;
+    float bTop = b.y + b.height / scalar;
+    float bBottom = b.y - b.height / scalar;
 
     // Check if the rectangles are overlapping on the x and y axes
     bool xOverlap = (aRight > bLeft) && (aLeft < bRight);

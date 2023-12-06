@@ -1,6 +1,8 @@
 #include "zombie.h"
 #include "player.h"
+
 #include <cstdlib>
+#include <math.h>
 #include <GL/glut.h>
 
 Zombie::Zombie(Player* player, float health, float damage, float speed) 
@@ -11,6 +13,9 @@ Zombie::Zombie(Player* player, float health, float damage, float speed)
     this->width = 0.05f;
     this->height = 0.05f;
     this->health = 100;
+
+    this->hitCooldown = 3.0f;
+    this->timeSinceLastHit = 0.0f;
 }
 
 void Zombie::draw()
@@ -37,4 +42,21 @@ void Zombie::move(float px, float py)
     } else if (py < this->y + player->height / 2) {
         this->y -= 0.0045f * speed;
     }
+}
+
+void Zombie::damagePlayer()
+{
+    player->health -= damage;
+}
+
+bool Zombie::isInRange()
+{
+    // Distance between zombie and player
+    float dx = this->x - player->x;
+    float dy = this->y - player->y;
+    float distance = std::sqrt(dx * dx + dy * dy);
+
+    // Determine zombie can reach player
+    float hitRange = (this->width + this->height) * 0.5f;
+    return distance <= hitRange;
 }

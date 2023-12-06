@@ -13,6 +13,7 @@ class Game {
 public:
     Game();
     void init();
+    void restartGame(); // Implement this later
     void update(float deltaTime);
     void render();
 
@@ -39,6 +40,8 @@ private:
     bool checkCollision(const Zombie& a, const Zombie& b);
     void adjustPositions(Zombie& a, Zombie& b);
 
+    void registerZombieHits();
+
     int currentRound;
     float timeSinceLastRoundChange;
     float roundDuration; // 15 seconds
@@ -47,6 +50,9 @@ private:
     int zombiesKilled;
     int secondsSurvived;
     int score;
+
+    // Settings
+    float deltaTime;
 };
 
 #endif
