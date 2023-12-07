@@ -8,6 +8,7 @@ class Zombie
     private:
 
         Player* player;
+        // GLuint zombieTexture;
 
     public:
 

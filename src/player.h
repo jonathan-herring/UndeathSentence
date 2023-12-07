@@ -1,3 +1,5 @@
+#include "util.h"
+
 #ifndef PLAYER_H
 #define PLAYER_H
 
@@ -14,6 +16,10 @@ class Player
 
     void draw();
     void move(float dx, float dy);
+
+    private:
+    
+    GLuint playerTexture;
 };
 
 #endif

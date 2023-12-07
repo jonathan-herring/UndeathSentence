@@ -5,6 +5,7 @@
 Game::Game() : controls(InputHandler(&player, &bullets)) 
 {
     roundDuration = 15;
+    backgroundTexture = loadPNGTexture("src/assets/UndeathBackdrop.png");
 }
 
 void Game::init() // Spawn player, zombies, set stats, **initialize UI elements** (later on), load textures?
@@ -30,6 +31,15 @@ void Game::render() // Draw background and game objects, possibly game over scre
         glVertex2f(0, 0.8);
         glColor3ub(255,255,255);
     glEnd();
+    // glEnable(GL_TEXTURE_2D);
+    // glBindTexture(GL_TEXTURE_2D, backgroundTexture);
+    // glBegin(GL_QUADS);
+    //     glTexCoord2f(0.0f, 0.0f); glVertex2f(0, 0);
+    //     glTexCoord2f(1.0f, 0.0f); glVertex2f(1, 0);
+    //     glTexCoord2f(1.0f, 1.0f); glVertex2f(1, 0.8);
+    //     glTexCoord2f(0.0f, 1.0f); glVertex2f(0, 0.8);
+    // glEnd();
+    // glDisable(GL_TEXTURE_2D);
 
     // Objects - uncomment later
     player.draw();

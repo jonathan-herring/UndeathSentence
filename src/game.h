@@ -6,6 +6,7 @@
 #include "input.h"
 #include "bullet.h"
 #include "ui.h"
+#include "util.h"
 
 #include <GL/glut.h>
 
@@ -53,6 +54,9 @@ private:
 
     // Settings
     float deltaTime;
+
+    // Assets
+    GLuint backgroundTexture;
 };
 
 #endif

@@ -16,6 +16,8 @@ Zombie::Zombie(Player* player, float health, float damage, float speed)
 
     this->hitCooldown = 3.0f;
     this->timeSinceLastHit = 0.0f;
+
+    // this->zombieTexture = loadPNGTexture("src/assets/UndeathZombie.png");
 }
 
 void Zombie::draw()
