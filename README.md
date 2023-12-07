@@ -9,7 +9,7 @@ You play as a lone character fending off a relentless horde of zombies that prog
 - Click LMB to use your weapon.
 
 ### Loss Condition
-Rules are simple. Kill as many zombies as possible, while surviving as long as you can. Losing all your health will end the game, giving you another chance to restart from round 1 for a higher score.
+Rules are simple. Kill as many zombies as possible, while surviving as long as you can. Losing all your health will end the game, bring you to the Game Over screen, where you can see your stats. Exit the game by closing the window.
 
 ### Storyline
 Sentenced to death for stealing food aboard a spaceship, you're sentenced to death by the horde. There is no eacape, but you won't go down without a fight.
