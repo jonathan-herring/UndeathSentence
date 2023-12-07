@@ -31,10 +31,12 @@ void Bullet::move(float deltaTime)
 void Bullet::draw()
 {
     glBegin(GL_QUADS);
+        glColor3f(1.0f, 1.0f, 0.0f); // Yellow
         glVertex2f(x - width / 2, y - height / 2);
         glVertex2f(x + width / 2, y - height / 2);
         glVertex2f(x + width / 2, y + height / 2);
         glVertex2f(x - width / 2, y + height / 2);
+        glColor3f(1.0f, 1.0f, 1.0f);
     glEnd();
 }
 
