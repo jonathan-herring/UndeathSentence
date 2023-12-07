@@ -43,6 +43,7 @@ void reshape(int width, int height)
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+    glutInitWindowPosition(560, 140);
     glutInitWindowSize(800, 800); // Set the window size
     glutCreateWindow("Undeath Sentence"); // Set the window title
 

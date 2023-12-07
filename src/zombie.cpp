@@ -12,7 +12,6 @@ Zombie::Zombie(Player* player, float health, float damage, float speed)
     this->y = static_cast<float>(rand()) / static_cast<float>(RAND_MAX) * 0.8f;
     this->width = 0.05f;
     this->height = 0.05f;
-    this->health = 100;
 
     this->hitCooldown = 3.0f;
     this->timeSinceLastHit = 0.0f;
