@@ -11,12 +11,16 @@ public:
     void setRound(int round);
     void setHealth(float health);
     void setGameOver(bool isGameOver);
+    void setZombiesKilled(int zombiesKilled);
 
 private:
     int round;
     float health;
     float countdownTimer;
     bool gameOver;
+
+    int zombiesKilled;
+    int score;
 
     void renderHealthBar();
     void renderRound();
