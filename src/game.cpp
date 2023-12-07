@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-Game::Game() : controls(InputHandler(&player, &bullets)) 
+Game::Game() : controls(InputHandler(&player, &bullets)), gameOver(false) 
 {
     roundDuration = 15;
 }
@@ -10,7 +10,6 @@ Game::Game() : controls(InputHandler(&player, &bullets))
 void Game::init() // Spawn player, zombies, set stats, **initialize UI elements** (later on), load textures?
 {
     zombiesKilled = 0;
-    secondsSurvived = 0;
     score = 0;
     currentRound = 1;
     timeSinceLastRoundChange = 0;
@@ -21,58 +20,68 @@ void Game::init() // Spawn player, zombies, set stats, **initialize UI elements*
 
 void Game::render() // Draw background and game objects, possibly game over screen later on
 {
-    // Background
-    glBegin(GL_QUADS);
-        glColor3ub(19,23,25);
-        glVertex2f(0, 0);
-        glVertex2f(1, 0);
-        glVertex2f(1, 0.8);
-        glVertex2f(0, 0.8);
-        glColor3ub(255,255,255);
-    glEnd();
-
-    // Objects - uncomment later
-    player.draw();
-    for (auto& zombie : zombies)
+    if (!gameOver)
     {
-        zombie.draw();
-    }
-    for (auto& bullet : bullets)
-    {
-        bullet.draw();
-    }
+        // Background
+        glBegin(GL_QUADS);
+            glColor3ub(19,23,25);
+            glVertex2f(0, 0);
+            glVertex2f(1, 0);
+            glVertex2f(1, 0.8);
+            glVertex2f(0, 0.8);
+            glColor3ub(255,255,255);
+        glEnd();
 
+        // Objects - uncomment later
+        player.draw();
+        for (auto& zombie : zombies)
+        {
+            zombie.draw();
+        }
+        for (auto& bullet : bullets)
+        {
+            bullet.draw();
+        }
+    }
     ui.render();
 }
 
 void Game::update(float deltaTime) // Handle input, move objects, collisions, update round, spawn zombies, update UI
 {
-    controls.update(deltaTime);
-
-    timeSinceLastRoundChange += deltaTime;
-    if (timeSinceLastRoundChange >= roundDuration) // Next round begins
+    if (!gameOver)
     {
-        currentRound++;
-        spawnZombies(3);
-        timeSinceLastRoundChange = 0;
+        controls.update(deltaTime);
+
+        timeSinceLastRoundChange += deltaTime;
+        if (timeSinceLastRoundChange >= roundDuration) // Next round begins
+        {
+            currentRound++;
+            spawnZombies(3);
+            timeSinceLastRoundChange = 0;
+        }
+
+        for (auto& zombie : zombies)
+        {
+            zombie.move(player.x + player.width / 2, player.y + player.height / 2);
+        }
+
+        resolveZombieCollisions();
+        resolveBulletCollisions();
+        removeOffScreenBullets();
+        registerZombieHits();
+        removeDeadZombies();
+
+        ui.setHealth(player.health);
+        ui.setRound(currentRound);        
+        ui.update(deltaTime);
+
+        if (player.health <= 0.0f)
+        {
+            gameOver = true;
+            ui.setGameOver(true);
+            ui.setZombiesKilled(zombiesKilled);
+        }
     }
-
-    for (auto& zombie : zombies)
-    {
-        zombie.move(player.x + player.width / 2, player.y + player.height / 2);
-    }
-
-    resolveZombieCollisions();
-    resolveBulletCollisions();
-    removeOffScreenBullets();
-    registerZombieHits();
-    removeDeadZombies();
-
-    ui.setHealth(player.health);
-    ui.setRound(currentRound);
-    if (player.health <= 0) // Game over condition (guaranteed to happen eventually)
-        ui.setGameOver(true);
-    ui.update(deltaTime);
 }
 
 void Game::restartGame()
@@ -109,12 +118,18 @@ void Game::registerZombieHits() {
 
 void Game::removeDeadZombies()
 {
-    zombies.erase(
-        std::remove_if(zombies.begin(), zombies.end(), [](const Zombie& zombie) {
-            return (zombie.health <= 0);
-        }),
-        zombies.end()
-    );
+    if (zombies.size() > 0)
+    {
+    for (auto it = zombies.begin(); it != zombies.end();) 
+        {
+            if (it->health <= 0) {
+                zombiesKilled++;
+                it = zombies.erase(it);
+            } else {
+                ++it;
+            }
+        }
+    }
 }
 
 void Game::updateBullets(float deltaTime)
