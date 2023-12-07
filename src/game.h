@@ -48,11 +48,11 @@ private:
 
     // Stats
     int zombiesKilled;
-    int secondsSurvived;
     int score;
 
     // Settings
     float deltaTime;
+    bool gameOver;
 };
 
 #endif
