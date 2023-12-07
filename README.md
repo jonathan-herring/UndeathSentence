@@ -25,5 +25,5 @@ Sentenced to death for stealing food aboard a spaceship, you're sentenced to dea
 
 #### Interacting with the Game:
 - Use WASD keys to move and the left mouse button to fire your weapon.
-- On the game over screen, press space to restart
+- On the game over screen, close the window to exit the game
 
