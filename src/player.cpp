@@ -8,7 +8,8 @@ Player::Player()
     this->y = 0.5f;
     this->width = 0.05f;
     this->height = 0.05f;
-    this->speed = 0.5; // Default speed
+    this->speed = 0.5f; // Default speed
+    this->health = 100.0f; // Default health
 }
 
 void Player::draw()

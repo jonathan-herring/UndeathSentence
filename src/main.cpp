@@ -1,99 +1,34 @@
-#include "player.h"
-#include "zombie.h"
-#include "input.h"
-#include "bullet.h"
+#include "game.h"
 
 #include <GL/glut.h>
 
-Player player;
-std::vector<Bullet> bullets;
-InputHandler controls(player, bullets);
-Zombie zombie1(player);
-Zombie zombie2(player);
-Zombie zombie3(player);
-
-void display();
-void reshape(int, int);
-void update(int);
-void handleKeypress(unsigned char, int, int);
-void handleKeyUp(unsigned char, int, int);
-void handleMousePress(int, int, int, int);
-
-void init()
-{
-    glClearColor(0.0, 0.0, 0.0, 1.0); // Background color
-}
-
-
-
-
-
-int main(int argc, char** argv)
-{
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowSize(800, 800);
-    glutCreateWindow("Undeath Sentence");
-
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(handleKeypress);
-    glutKeyboardUpFunc(handleKeyUp);
-    glutMouseFunc(handleMousePress);
-    glutTimerFunc(16, update, 0);
-    
-
-
-    glutMainLoop();
-
-    return 0;
-}
-
-
-
-void drawBackground();
+Game game;
 
 void display()
 {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    // Game logic updates
-    controls.update(0.01667);
-
-    zombie1.move(player.x, player.y);
-    zombie2.move(player.x, player.y);
-    zombie3.move(player.x, player.y);
-
-    for (auto bullet : bullets) {
-        bullet.move(0.01667);
-    }
-
-    // Render game to screen
-    drawBackground();
-
-    player.draw();
-    
-    zombie1.draw();
-    zombie2.draw();
-    zombie3.draw();
-
-    for (auto bullet : bullets) {
-        bullet.draw();
-    }
-
+    game.render();
     glutSwapBuffers();
 }
 
-void drawBackground()
+void update(int value)
 {
-    glBegin(GL_QUADS);
-        glColor3ub(19,23,25);
-        glVertex2f(0, 0);
-        glVertex2f(1, 0);
-        glVertex2f(1, 0.8);
-        glVertex2f(0, 0.8);
-        glColor3ub(255,255,255);
-    glEnd();
+    game.update(0.01667f);
+    glutPostRedisplay();
+    glutTimerFunc(16, update, 0);
+}
+
+void handleKeypress(unsigned char key, int x, int y) {
+    game.handleKeyPress(key, x, y);
+}
+
+void handleKeyUp(unsigned char key, int x, int y) {
+    game.handleKeyUp(key, x, y);
+}
+
+void handleMousePress(int button, int state, int x, int y) 
+{
+    game.handleMousePress(button, state, x, y);
 }
 
 void reshape(int width, int height)
@@ -105,25 +40,25 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+    glutInitWindowPosition(560, 140);
+    glutInitWindowSize(800, 800); // Set the window size
+    glutCreateWindow("Undeath Sentence"); // Set the window title
 
-void update(int value)
-{
-    glutPostRedisplay();
-    glutTimerFunc(33, update, 0);
-}
+    game.init();
 
+    glutDisplayFunc(display);
+    // glutIdleFunc(display); // Register display as the idle function as well
+    glutReshapeFunc(reshape);
+    glutKeyboardFunc(handleKeypress);
+    glutKeyboardUpFunc(handleKeyUp);
+    glutMouseFunc(handleMousePress);
 
-void handleKeypress(unsigned char key, int x, int y)
-{
-    controls.keyPressed(key, x, y);
-}
+    glutTimerFunc(16, update, 0);
 
-void handleKeyUp(unsigned char key, int x, int y)
-{
-    controls.keyUp(key, x, y);
-}
+    glutMainLoop();
 
-void handleMousePress(int button, int state, int x, int y)
-{
-    controls.mousePressed(button, state, x, y);
+    return 0;
 }
