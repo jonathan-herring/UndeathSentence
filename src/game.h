@@ -6,6 +6,7 @@
 #include "input.h"
 #include "bullet.h"
 #include "ui.h"
+#include "leaderboard.h"
 
 #include <GL/glut.h>
 
@@ -28,6 +29,7 @@ private:
     std::vector<Bullet> bullets;
     UI ui;
     InputHandler controls;
+    Leaderboard leaderboard;
 
     void spawnZombies(int count); // Spawn x zombies with health, damage, and speed set according to round number
     void removeDeadZombies(); // For removing zombies that are 0 health

@@ -1,5 +1,3 @@
-// UI.cpp - change meeeee
-
 #include "ui.h"
 #include <GL/glut.h>
 #include <cstdio>
