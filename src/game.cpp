@@ -44,6 +44,8 @@ void Game::render() // Draw background and game objects, possibly game over scre
         }
     }
     ui.render();
+    if (gameOver)
+        leaderboard.renderLeaderboard();
 }
 
 void Game::update(float deltaTime) // Handle input, move objects, collisions, update round, spawn zombies, update UI
@@ -80,6 +82,9 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
             gameOver = true;
             ui.setGameOver(true);
             ui.setZombiesKilled(zombiesKilled);
+            score = 10 * currentRound + 5 * zombiesKilled;
+            leaderboard.updateLeaderboard(score);
+            leaderboard.saveLeaderboard();
         }
     }
 }
