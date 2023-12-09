@@ -18,11 +18,13 @@ void update(int value)
     glutTimerFunc(16, update, 0);
 }
 
-void handleKeypress(unsigned char key, int x, int y) {
+void handleKeypress(unsigned char key, int x, int y) 
+{
     game.handleKeyPress(key, x, y);
 }
 
-void handleKeyUp(unsigned char key, int x, int y) {
+void handleKeyUp(unsigned char key, int x, int y) 
+{
     game.handleKeyUp(key, x, y);
 }
 
@@ -40,7 +42,8 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv) 
+{
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowPosition(560, 140);

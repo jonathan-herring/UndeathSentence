@@ -14,7 +14,6 @@ class Game {
 public:
     Game();
     void init();
-    void restartGame(); // Implement this later
     void update(float deltaTime);
     void render();
 

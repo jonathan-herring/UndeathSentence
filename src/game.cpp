@@ -88,13 +88,6 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
     }
 }
 
-void Game::restartGame()
-{
-    // init() maybe -> see if this is viable
-    ui.setGameOver(false);
-}
-
-
 void Game::spawnZombies(int count) // Spawn x zombies with health, damage, and speed set according to round number
 {
     float multiplier = currentRound - 1.0;
