@@ -10,6 +10,8 @@ public:
     void render();
     void setRound(int round);
     void setHealth(float health);
+    bool getStartScreen();
+    void setStartScreen(bool start);
     void setGameOver(bool isGameOver);
     void setZombiesKilled(int zombiesKilled);
 
@@ -17,6 +19,7 @@ private:
     int round;
     float health;
     float countdownTimer;
+    bool startScreen;
     bool gameOver;
 
     int zombiesKilled;
@@ -25,6 +28,7 @@ private:
     void renderHealthBar();
     void renderRound();
     void renderCountdown();
+    void renderStartScreen();
     void renderGameOverScreen();
 };
 

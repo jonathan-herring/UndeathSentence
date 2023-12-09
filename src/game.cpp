@@ -14,8 +14,6 @@ void Game::init() // Spawn player, zombies, set stats, **initialize UI elements*
     currentRound = 1;
     timeSinceLastRoundChange = 0;
     deltaTime = 0.01667f;
-
-    spawnZombies(3);
 }
 
 void Game::render() // Draw background and game objects, possibly game over screen later on
@@ -250,5 +248,11 @@ void Game::handleKeyUp(unsigned char key, int x, int y)
 
 void Game::handleMousePress(int button, int state, int x, int y)
 {
-    controls.mousePressed(button, state, x, y);
+    if (ui.getStartScreen()) {
+        ui.setStartScreen(false);
+        spawnZombies(3);
+    }
+    else {
+        controls.mousePressed(button, state, x, y);
+    }
 }
