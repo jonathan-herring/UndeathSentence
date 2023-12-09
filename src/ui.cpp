@@ -3,7 +3,7 @@
 #include <cstdio>
 
 
-UI::UI() : round(1), health(100), countdownTimer(15.0f), gameOver(false) 
+UI::UI() : round(1), health(100), countdownTimer(15.0f), startScreen(true), gameOver(false) 
 {   
     score = 0;
     zombiesKilled = 0;
@@ -11,16 +11,21 @@ UI::UI() : round(1), health(100), countdownTimer(15.0f), gameOver(false)
 
 void UI::update(float deltaTime) {
     // Update countdown timer
-    if (countdownTimer > 0) {
-        countdownTimer -= deltaTime;
-    } else {
-        countdownTimer = 15;
+    if (!startScreen) {
+        if (countdownTimer > 0) {
+            countdownTimer -= deltaTime;
+        } else {
+            countdownTimer = 15;
+        }
     }
 }
 
 void UI::render() {
     // Render different UI components
-    if (!gameOver) {
+    if (startScreen) {
+        renderStartScreen();
+    }
+    else if (!gameOver) {
         renderHealthBar();
         renderRound();
         renderCountdown();
@@ -35,6 +40,14 @@ void UI::setRound(int round) {
 
 void UI::setHealth(float health) {
     this->health = health;
+}
+
+bool UI::getStartScreen() {
+    return startScreen;
+}
+
+void UI::setStartScreen(bool start) {
+    startScreen = start;
 }
 
 void UI::setGameOver(bool isGameOver) {
@@ -94,6 +107,17 @@ void UI::renderCountdown() // Code to render the countdown timer
 
     for (char* c = roundText; *c != '\0'; c++) {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+    }
+}
+
+void UI::renderStartScreen()
+{
+    glColor3ub(255, 255, 255);
+    glRasterPos2f(0.3, 0.5);
+    const char* startMessage = "Click to Start";
+    for (int i = 0; startMessage[i] != '\0'; i++) 
+    {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, startMessage[i]);
     }
 }
 
