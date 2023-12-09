@@ -1,5 +1,3 @@
-// UI.h
-
 #ifndef UI_H
 #define UI_H
 
@@ -27,6 +25,8 @@ private:
 
     void renderHealthBar();
     void renderRound();
+    void renderScore();
+    void renderZombiesKilled();
     void renderCountdown();
     void renderStartScreen();
     void renderGameOverScreen();

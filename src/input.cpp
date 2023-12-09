@@ -11,7 +11,8 @@ InputHandler::InputHandler(Player* player, std::vector<Bullet>* bullets)
     bulletCoolDown = 0.3f;
 }
 
-void InputHandler::keyPressed(unsigned char key, int x, int y) {
+void InputHandler::keyPressed(unsigned char key, int x, int y) 
+{
     switch (key) {
         case 'w': upPressed = true; break;
         case 's': downPressed = true; break;
@@ -21,7 +22,8 @@ void InputHandler::keyPressed(unsigned char key, int x, int y) {
     }
 }
 
-void InputHandler::keyUp(unsigned char key, int x, int y) {
+void InputHandler::keyUp(unsigned char key, int x, int y) 
+{
     switch (key) {
         case 'w': upPressed = false; break;
         case 's': downPressed = false; break;
@@ -31,7 +33,8 @@ void InputHandler::keyUp(unsigned char key, int x, int y) {
     }
 }
 
-void InputHandler::update(float deltaTime) { // Only handles movement of players and bullets based on input
+void InputHandler::update(float deltaTime) // Only handles movement of players and bullets based on input
+{
     float dx = 0, dy = 0;
     float speed = player->speed;
     float positionChange = speed * deltaTime;
@@ -73,7 +76,8 @@ void InputHandler::update(float deltaTime) { // Only handles movement of players
     }
 }
 
-void InputHandler::mousePressed(int button, int state, int x, int y) {
+void InputHandler::mousePressed(int button, int state, int x, int y) 
+{
     if (timeSinceLastFire >= bulletCoolDown) {
         if (button == GLUT_LEFT_BUTTON) {
             float gameX = (x * (1.0f / 800.0f));

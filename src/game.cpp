@@ -48,7 +48,7 @@ void Game::render() // Draw background and game objects, possibly game over scre
 
 void Game::update(float deltaTime) // Handle input, move objects, collisions, update round, spawn zombies, update UI
 {
-    if (!gameOver)
+    if (!gameOver && !ui.getStartScreen())
     {
         controls.update(deltaTime);
 
@@ -56,6 +56,7 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
         if (timeSinceLastRoundChange >= roundDuration) // Next round begins
         {
             currentRound++;
+            ui.setRound(currentRound);
             spawnZombies(3);
             timeSinceLastRoundChange = 0;
         }
@@ -80,19 +81,12 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
             gameOver = true;
             ui.setGameOver(true);
             ui.setZombiesKilled(zombiesKilled);
-            score = 10 * currentRound + 5 * zombiesKilled;
+            score = 10 * (currentRound - 1) + 5 * zombiesKilled;
             leaderboard.updateLeaderboard(score);
             leaderboard.saveLeaderboard();
         }
     }
 }
-
-void Game::restartGame()
-{
-    // init() maybe -> see if this is viable
-    ui.setGameOver(false);
-}
-
 
 void Game::spawnZombies(int count) // Spawn x zombies with health, damage, and speed set according to round number
 {
@@ -127,6 +121,7 @@ void Game::removeDeadZombies()
         {
             if (it->health <= 0) {
                 zombiesKilled++;
+                ui.setZombiesKilled(zombiesKilled);
                 it = zombies.erase(it);
             } else {
                 ++it;
@@ -245,7 +240,7 @@ void Game::handleKeyUp(unsigned char key, int x, int y)
 {
     controls.keyUp(key, x, y);
 }
-
+#include <iostream>
 void Game::handleMousePress(int button, int state, int x, int y)
 {
     if (ui.getStartScreen()) {
