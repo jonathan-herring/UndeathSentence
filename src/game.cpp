@@ -56,6 +56,7 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
         if (timeSinceLastRoundChange >= roundDuration) // Next round begins
         {
             currentRound++;
+            ui.setRound(currentRound);
             spawnZombies(3);
             timeSinceLastRoundChange = 0;
         }
@@ -80,7 +81,7 @@ void Game::update(float deltaTime) // Handle input, move objects, collisions, up
             gameOver = true;
             ui.setGameOver(true);
             ui.setZombiesKilled(zombiesKilled);
-            score = 10 * currentRound + 5 * zombiesKilled;
+            score = 10 * (currentRound - 1) + 5 * zombiesKilled;
             leaderboard.updateLeaderboard(score);
             leaderboard.saveLeaderboard();
         }
@@ -127,6 +128,7 @@ void Game::removeDeadZombies()
         {
             if (it->health <= 0) {
                 zombiesKilled++;
+                ui.setZombiesKilled(zombiesKilled);
                 it = zombies.erase(it);
             } else {
                 ++it;

@@ -28,6 +28,8 @@ void UI::render() {
     else if (!gameOver) {
         renderHealthBar();
         renderRound();
+        renderZombiesKilled();
+        renderScore();
         renderCountdown();
     } else {
         renderGameOverScreen();
@@ -92,6 +94,32 @@ void UI::renderRound() // Code to render the current round
     glRasterPos2f(0.05, 0.90);
 
     for (char* c = roundText; *c != '\0'; c++) {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+    }
+}
+
+void UI::renderScore() // Code to render the current score
+{
+    this->score = 5 * zombiesKilled + 10 * (round - 1);
+    char scoreText[20];
+    std::sprintf(scoreText, "Score: %d", this->score);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(0.45, 0.95);
+
+    for (char* c = scoreText; *c != '\0'; c++) {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
+    }
+}
+void UI::renderZombiesKilled() // Code to render the current score
+{
+    char zombieText[20];
+    std::sprintf(zombieText, "Zombies Killed: %d", this->zombiesKilled);
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glRasterPos2f(0.35, 0.90);
+
+    for (char* c = zombieText; *c != '\0'; c++) {
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, *c);
     }
 }
@@ -165,6 +193,7 @@ void UI::renderGameOverScreen() // Code to render the game over screen
     }
 
     // Display Score
+    score = zombiesKilled * 5 + roundsSurvived * 10; // Ensure score is correctly calculated
     char scoreText[20];
     std::sprintf(scoreText, "Score: %d", score);
 
