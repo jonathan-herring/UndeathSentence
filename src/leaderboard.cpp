@@ -3,11 +3,13 @@
 #include <algorithm>
 #include <GL/glut.h>
 
-Leaderboard::Leaderboard() : fileName("leaderboard.txt") {
+Leaderboard::Leaderboard() : fileName("leaderboard.txt") 
+{
     loadLeaderboard();
 }
 
-void Leaderboard::loadLeaderboard() {
+void Leaderboard::loadLeaderboard() 
+{
     std::ifstream file(fileName);
     leaderboard.clear();
 
@@ -19,7 +21,8 @@ void Leaderboard::loadLeaderboard() {
     file.close();
 }
 
-void Leaderboard::updateLeaderboard(int newScore) {
+void Leaderboard::updateLeaderboard(int newScore) 
+{
     leaderboard.push_back(LeaderboardEntry(newScore));
     std::sort(leaderboard.begin(), leaderboard.end());
 
@@ -29,7 +32,8 @@ void Leaderboard::updateLeaderboard(int newScore) {
     }
 }
 
-void Leaderboard::saveLeaderboard() {
+void Leaderboard::saveLeaderboard() 
+{
     std::ofstream file(fileName);
 
     for (const auto& entry : leaderboard) {
@@ -39,7 +43,8 @@ void Leaderboard::saveLeaderboard() {
     file.close();
 }
 
-void Leaderboard::renderLeaderboard() {
+void Leaderboard::renderLeaderboard() 
+{
     float startY = 0.30f;
     float stepY = 0.05f;
 

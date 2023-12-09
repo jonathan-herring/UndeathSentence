@@ -48,7 +48,7 @@ void Game::render() // Draw background and game objects, possibly game over scre
 
 void Game::update(float deltaTime) // Handle input, move objects, collisions, update round, spawn zombies, update UI
 {
-    if (!gameOver)
+    if (!gameOver && !ui.getStartScreen())
     {
         controls.update(deltaTime);
 
@@ -240,7 +240,7 @@ void Game::handleKeyUp(unsigned char key, int x, int y)
 {
     controls.keyUp(key, x, y);
 }
-
+#include <iostream>
 void Game::handleMousePress(int button, int state, int x, int y)
 {
     if (ui.getStartScreen()) {

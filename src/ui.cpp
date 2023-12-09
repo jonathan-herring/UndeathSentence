@@ -9,7 +9,8 @@ UI::UI() : round(1), health(100), countdownTimer(15.0f), startScreen(true), game
     zombiesKilled = 0;
 }
 
-void UI::update(float deltaTime) {
+void UI::update(float deltaTime) 
+{
     // Update countdown timer
     if (!startScreen) {
         if (countdownTimer > 0) {
@@ -20,7 +21,8 @@ void UI::update(float deltaTime) {
     }
 }
 
-void UI::render() {
+void UI::render() 
+{
     // Render different UI components
     if (startScreen) {
         renderStartScreen();

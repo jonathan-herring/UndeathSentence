@@ -5,7 +5,8 @@
 #include <vector>
 
 // Leaderboard Entry Structure
-struct LeaderboardEntry {
+struct LeaderboardEntry 
+{
     int score;
 
     // Default constructor
@@ -34,4 +35,4 @@ private:
     const std::string fileName;
 };
 
-#endif // LEADERBOARD_H
+#endif
